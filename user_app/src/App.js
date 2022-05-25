@@ -34,6 +34,7 @@ function App() {
   const postNewUser = (newUser) => {
     axios.post("https://reqres.in/api/users", newUser)
       .then(res=> {
+        console.log(res.data)
         setUsers([ res.data, ...users]);
       }).catch(err => console.error(err))
       .finally(() => setFormValues(initialFormValues))
@@ -64,7 +65,6 @@ function App() {
     schema.isValid(formValues).then(valid => setDisable(!valid))
   }, [formValues])
 
-
   return (
     <div className='container'>
       <header><h1>Add User App</h1></header>
@@ -77,11 +77,11 @@ function App() {
       />
       {users.map(user => {
         return (
-          <User key={user.id} details={user}/>
-        )
-      })}
+            <User key={user.id} user={user}/>
+          )
+        })
+      }
     </div>
-    
   );
 }
 
