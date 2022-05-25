@@ -1,7 +1,13 @@
 import React from 'react'
 
 export default function Form(props) {
-    const {values, submit, change, disable, errors} = props;
+    const {
+        values, 
+        submit, 
+        change, 
+        disable, 
+        errors
+    } = props;
 
     const onSubmit = evt => {
         evt.preventDefault();
@@ -11,14 +17,13 @@ export default function Form(props) {
     const onChange = evt => {
         const { name, value, type, checked } = evt.target;
         const realValue = type === "checkbox" ? checked : value;
-        change(name, realValue)
+        change(name, realValue);
     }
 
     return (
         <form className='form container' onSubmit={onSubmit}>
             <div className='form-group submit'>
                 <h2>Create a User</h2>
-                <button disabled={disable}>Submit</button>
                 <div className='errors'>
                     <div>{errors.first_name}</div>
                     <div>{errors.last_name}</div>
@@ -70,7 +75,10 @@ export default function Form(props) {
                     />
                 </label>
             </div>
-            
+            <div>
+                <button disabled={disable}>Submit</button> 
+            </div>
+               
         </form>
     )
 }

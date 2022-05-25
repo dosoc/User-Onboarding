@@ -34,7 +34,7 @@ function App() {
   const postNewUser = (newUser) => {
     axios.post("https://reqres.in/api/users", newUser)
       .then(res=> {
-        console.log(res)
+        setUsers([ res.data, ...users]);
       }).catch(err => console.error(err))
       .finally(() => setFormValues(initialFormValues))
   }
@@ -46,7 +46,7 @@ function App() {
   }
 
   const inputChange = (name, value) => {
-    validate(name, value)
+    validate(name, value);
     setFormValues({...formValues, [name]: value });
   }
 
@@ -60,9 +60,9 @@ function App() {
     }
     postNewUser(newUser);
   }
-  // useEffect(()=> {
-  //   schema.isValid(formValues).then(valid => setDisable(!valid))
-  // }, [formValues])
+  useEffect(()=> {
+    schema.isValid(formValues).then(valid => setDisable(!valid))
+  }, [formValues])
 
 
   return (
